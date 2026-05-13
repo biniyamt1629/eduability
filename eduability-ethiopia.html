@@ -1,0 +1,2480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EduAbility Ethiopia — Inclusive Learning for Every Student</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Noto+Serif+Ethiopic:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green: #2E7D32;
+  --green-light: #4CAF50;
+  --green-pale: #E8F5E9;
+  --yellow: #F9A825;
+  --yellow-light: #FFF8E1;
+  --red: #C62828;
+  --red-light: #FFEBEE;
+  --gold: #FFB300;
+  --dark: #0D1B0E;
+  --dark2: #1A2E1C;
+  --dark3: #263829;
+  --text: #1A2E1C;
+  --text-muted: #5A7A5C;
+  --text-light: #8FAE91;
+  --bg: #F6FBF6;
+  --bg2: #EDFAEE;
+  --white: #FFFFFF;
+  --border: rgba(46,125,50,0.15);
+  --shadow: 0 4px 24px rgba(46,125,50,0.08);
+  --shadow-lg: 0 12px 48px rgba(46,125,50,0.14);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --font: 'Sora', sans-serif;
+  --font-eth: 'Noto Serif Ethiopic', serif;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --dark: #E8F5E9;
+  --dark2: #C8E6C9;
+  --dark3: #A5D6A7;
+  --text: #E8F5E9;
+  --text-muted: #A5D6A7;
+  --text-light: #66BB6A;
+  --bg: #0A1A0B;
+  --bg2: #0F2410;
+  --white: #152617;
+  --border: rgba(76,175,80,0.2);
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,0.5);
+  --green-pale: #1B3A1D;
+  --yellow-light: #2A2000;
+  --red-light: #2A0A0A;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* SKIP LINK */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--green);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-xs);
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 1rem; }
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(246,251,246,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s;
+}
+
+[data-theme="dark"] nav {
+  background: rgba(10,26,11,0.95);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.nav-logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+}
+
+.nav-logo-text {
+  line-height: 1.2;
+}
+
+.nav-logo-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.nav-logo-sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-eth);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--green);
+  background: var(--green-pale);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.btn-icon:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--green-pale);
+}
+
+.btn-primary {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 0.55rem 1.25rem;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-primary:hover {
+  background: #1B5E20;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(46,125,50,0.35);
+}
+
+.hamburger {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  border-radius: 10px;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px;
+}
+
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: calc(100vh - 68px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 4rem 1.5rem;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+}
+
+.hero-blob-1 {
+  width: 500px;
+  height: 500px;
+  background: var(--green-light);
+  top: -100px;
+  right: -100px;
+}
+
+.hero-blob-2 {
+  width: 350px;
+  height: 350px;
+  background: var(--gold);
+  bottom: -50px;
+  left: -80px;
+  opacity: 0.2;
+}
+
+.hero-blob-3 {
+  width: 200px;
+  height: 200px;
+  background: var(--red);
+  top: 40%;
+  left: 50%;
+  opacity: 0.1;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green-pale);
+  border: 1px solid rgba(46,125,50,0.25);
+  border-radius: 100px;
+  padding: 0.4rem 1rem;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 1.5rem;
+  animation: fadeSlideUp 0.6s ease;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--green-light);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  animation: fadeSlideUp 0.7s ease;
+}
+
+.hero-title .accent {
+  color: var(--green);
+  position: relative;
+  display: inline-block;
+}
+
+.hero-title .eth {
+  font-family: var(--font-eth);
+  color: var(--yellow);
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin-bottom: 2rem;
+  animation: fadeSlideUp 0.8s ease;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  animation: fadeSlideUp 0.9s ease;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--green);
+  border: 1.5px solid var(--green);
+  padding: 0.65rem 1.4rem;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-outline:hover {
+  background: var(--green);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  animation: fadeSlideUp 1s ease;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat-num {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--green);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* HERO VISUAL */
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeSlideUp 0.8s ease;
+}
+
+.hero-phone {
+  width: 280px;
+  height: 520px;
+  background: var(--white);
+  border-radius: 36px;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.phone-notch {
+  width: 100px;
+  height: 28px;
+  background: var(--bg);
+  border-radius: 0 0 16px 16px;
+  margin: 0 auto;
+}
+
+.phone-screen {
+  padding: 12px;
+}
+
+.phone-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.phone-greeting {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.phone-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.phone-avatar {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.phone-subject-card {
+  background: linear-gradient(135deg, var(--green), #388E3C);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.phone-subject-label {
+  font-size: 9px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.phone-subject-name {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.phone-subject-progress {
+  font-size: 9px;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.phone-progress-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 2px;
+}
+
+.phone-progress-fill {
+  height: 100%;
+  width: 68%;
+  background: white;
+  border-radius: 2px;
+}
+
+.phone-quick-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.phone-quick-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.phone-quick-item {
+  background: var(--bg2);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.phone-quick-icon {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.phone-quick-text {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.phone-accessibility {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.phone-acc-btn {
+  flex: 1;
+  background: var(--green-pale);
+  border: 1px solid rgba(46,125,50,0.2);
+  border-radius: 8px;
+  padding: 6px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.floating-card {
+  position: absolute;
+  background: var(--white);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  padding: 12px 16px;
+  z-index: 3;
+  animation: float 4s ease-in-out infinite;
+}
+
+.float-card-1 {
+  top: 20px;
+  right: -40px;
+  animation-delay: 0s;
+}
+
+.float-card-2 {
+  bottom: 80px;
+  left: -50px;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.fc-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 3px;
+}
+
+.fc-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.fc-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--green-light);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* SECTION */
+.section {
+  padding: 5rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green-pale);
+  color: var(--green);
+  border-radius: 100px;
+  padding: 0.3rem 0.9rem;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.section-title .accent { color: var(--green); }
+
+.section-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ACCESSIBILITY STRIP */
+.access-strip {
+  background: var(--green);
+  padding: 0;
+  overflow: hidden;
+}
+
+.access-strip-inner {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.access-scroll {
+  display: flex;
+  gap: 0;
+  animation: scrollLeft 20s linear infinite;
+  white-space: nowrap;
+}
+
+.access-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1rem 2rem;
+  border-right: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.access-item span:first-child { font-size: 20px; }
+
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* FEATURES */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green), var(--green-light));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: rgba(46,125,50,0.3);
+}
+
+.feature-card:hover::before { transform: scaleX(1); }
+
+.feature-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 1.25rem;
+}
+
+.feature-icon.green { background: var(--green-pale); }
+.feature-icon.yellow { background: var(--yellow-light); }
+.feature-icon.red { background: var(--red-light); }
+
+.feature-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.feature-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* SUBJECTS */
+.subjects-section {
+  background: var(--bg2);
+  padding: 5rem 1.5rem;
+}
+
+.subjects-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grade-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.grade-tab {
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font);
+}
+
+.grade-tab.active, .grade-tab:hover {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.subject-card {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: block;
+}
+
+.subject-card:hover {
+  border-color: var(--green);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.subject-icon { font-size: 28px; margin-bottom: 0.5rem; }
+
+.subject-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.subject-grade {
+  font-size: 10px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* AI TUTOR */
+.ai-section {
+  padding: 5rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.ai-chat-demo {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.chat-header {
+  background: var(--green);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.chat-avatar {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.chat-info h4 { font-size: 13px; font-weight: 700; }
+.chat-info p { font-size: 10px; opacity: 0.8; }
+
+.chat-online {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+.chat-online-dot {
+  width: 6px;
+  height: 6px;
+  background: #69F0AE;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.chat-messages {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 200px;
+}
+
+.chat-msg {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.chat-msg.user { flex-direction: row-reverse; }
+
+.chat-bubble {
+  max-width: 240px;
+  padding: 0.6rem 0.9rem;
+  border-radius: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.chat-msg:not(.user) .chat-bubble {
+  background: var(--green-pale);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-msg.user .chat-bubble {
+  background: var(--green);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-msg-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.chat-msg.user .chat-msg-avatar {
+  background: var(--gold);
+}
+
+.chat-input-area {
+  border-top: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.chat-input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  font-size: 12px;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+}
+
+.chat-send-btn {
+  width: 34px;
+  height: 34px;
+  background: var(--green);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: white;
+  transition: var(--transition);
+}
+
+.chat-send-btn:hover { background: #1B5E20; }
+
+.ai-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ai-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.ai-feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--green-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.ai-feature-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.ai-feature-desc {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+/* LEARNING MODES */
+.modes-section {
+  background: var(--dark2);
+  padding: 5rem 1.5rem;
+}
+
+[data-theme="dark"] .modes-section {
+  background: #050F06;
+}
+
+.modes-inner { max-width: 1200px; margin: 0 auto; }
+
+.modes-section .section-title { color: white; }
+.modes-section .section-desc { color: rgba(255,255,255,0.6); }
+.modes-section .section-tag { background: rgba(76,175,80,0.2); }
+
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.mode-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.mode-card:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(76,175,80,0.5);
+  transform: translateY(-4px);
+}
+
+.mode-icon {
+  font-size: 32px;
+  margin-bottom: 1rem;
+}
+
+.mode-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.mode-desc {
+  font-size: 0.825rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+
+.mode-badge {
+  display: inline-block;
+  background: rgba(76,175,80,0.2);
+  color: #81C784;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 100px;
+  margin-top: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* LANGUAGES */
+.lang-section {
+  padding: 5rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.lang-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.lang-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: var(--transition);
+}
+
+.lang-card:hover {
+  border-color: var(--green);
+  box-shadow: var(--shadow);
+  transform: translateX(4px);
+}
+
+.lang-flag {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.lang-name { font-size: 0.95rem; font-weight: 700; }
+.lang-native { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-eth); }
+.lang-students { font-size: 10px; color: var(--text-light); margin-top: 2px; }
+
+/* ACCESSIBILITY CENTER */
+.acc-section {
+  background: var(--green-pale);
+  padding: 5rem 1.5rem;
+}
+
+[data-theme="dark"] .acc-section { background: rgba(46,125,50,0.08); }
+
+.acc-inner { max-width: 1200px; margin: 0 auto; }
+
+.acc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.acc-item {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  padding: 1.25rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.acc-item:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+  border-color: rgba(46,125,50,0.4);
+}
+
+.acc-item-icon { font-size: 28px; margin-bottom: 0.6rem; }
+.acc-item-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.acc-item-desc { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+
+/* STATS SECTION */
+.stats-section {
+  background: linear-gradient(135deg, var(--green), #1B5E20);
+  padding: 4rem 1.5rem;
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-item { color: white; }
+
+.stat-num {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 13px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+/* TESTIMONIALS */
+.testimonials-section {
+  padding: 5rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: var(--transition);
+}
+
+.testimonial-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.testimonial-stars {
+  font-size: 14px;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.testimonial-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: white;
+  font-weight: 700;
+}
+
+.testimonial-name { font-size: 13px; font-weight: 700; }
+.testimonial-role { font-size: 11px; color: var(--text-muted); }
+
+/* ACCESSIBILITY TOOLBAR */
+.acc-toolbar {
+  position: fixed;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.acc-tool-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  font-family: var(--font);
+}
+
+.acc-tool-btn:hover, .acc-tool-btn.active {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+  transform: scale(1.1);
+}
+
+.acc-tool-btn title { display: none; }
+
+/* CTA */
+.cta-section {
+  padding: 6rem 1.5rem;
+  text-align: center;
+  background: var(--bg2);
+}
+
+.cta-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cta-eth-text {
+  font-family: var(--font-eth);
+  font-size: 1.3rem;
+  color: var(--green);
+  margin-bottom: 1rem;
+}
+
+.cta-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.cta-desc {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.cta-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-large {
+  padding: 0.85rem 2rem;
+  font-size: 15px;
+  border-radius: 12px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.7);
+  padding: 4rem 1.5rem 2rem;
+}
+
+[data-theme="dark"] footer {
+  background: #050F06;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-brand-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.footer-eth {
+  font-family: var(--font-eth);
+  font-size: 12px;
+  color: var(--green-light);
+}
+
+.footer-col-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--green-light); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom p { font-size: 12px; }
+
+.eth-flag {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.eth-flag span {
+  width: 18px;
+  height: 10px;
+  display: block;
+}
+
+.flag-g { background: #078930; }
+.flag-y { background: #FCDD09; }
+.flag-r { background: #DA121A; }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-visual { display: none; }
+  .ai-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .acc-toolbar { display: none; }
+}
+
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.25rem; }
+  .grade-tabs { gap: 0.35rem; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .feature-card, .subject-card { border-width: 2px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Font size classes */
+.font-lg body { font-size: 20px; }
+.font-xl body { font-size: 24px; }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">ወደ ዋናው ይዘት ዝለል — Skip to main content</a>
+
+<!-- ACCESSIBILITY TOOLBAR -->
+<aside class="acc-toolbar" role="complementary" aria-label="Accessibility tools">
+  <button class="acc-tool-btn" id="ttsBtn" onclick="toggleTTS()" title="Text to Speech" aria-label="Toggle Text to Speech">🔊</button>
+  <button class="acc-tool-btn" id="fontBtn" onclick="cycleFontSize()" title="Font Size" aria-label="Increase Font Size">A+</button>
+  <button class="acc-tool-btn" id="contrastBtn" onclick="toggleContrast()" title="High Contrast" aria-label="Toggle High Contrast">◑</button>
+  <button class="acc-tool-btn" onclick="toggleDyslexia()" title="Dyslexia Font" aria-label="Toggle Dyslexia-friendly Font">D</button>
+</aside>
+
+<!-- NAV -->
+<nav role="navigation" aria-label="Main navigation">
+  <a href="#" class="nav-logo" aria-label="EduAbility Ethiopia Home">
+    <div class="nav-logo-icon" aria-hidden="true">📚</div>
+    <div class="nav-logo-text">
+      <div class="nav-logo-name">EduAbility Ethiopia</div>
+      <div class="nav-logo-sub">የሁሉም ትምህርት — Education for All</div>
+    </div>
+  </a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="#subjects">Subjects</a></li>
+    <li><a href="#ai-tutor">AI Tutor</a></li>
+    <li><a href="#accessibility">Accessibility</a></li>
+    <li><a href="#languages">Languages</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="btn-icon" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">🌙</button>
+    <button class="btn-icon" onclick="activateSpeech()" aria-label="Voice navigation">🎤</button>
+    <a href="#" class="btn-primary">Start Learning</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU (hidden) -->
+<div id="mobileMenu" style="display:none; background:var(--white); border-bottom:1px solid var(--border); padding:1rem 1.5rem;" role="navigation" aria-label="Mobile navigation">
+  <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem;">
+    <li><a href="#subjects" style="text-decoration:none;color:var(--text);font-size:14px;font-weight:500;padding:0.5rem 0;display:block;">📚 Subjects</a></li>
+    <li><a href="#ai-tutor" style="text-decoration:none;color:var(--text);font-size:14px;font-weight:500;padding:0.5rem 0;display:block;">🤖 AI Tutor</a></li>
+    <li><a href="#accessibility" style="text-decoration:none;color:var(--text);font-size:14px;font-weight:500;padding:0.5rem 0;display:block;">♿ Accessibility</a></li>
+    <li><a href="#languages" style="text-decoration:none;color:var(--text);font-size:14px;font-weight:500;padding:0.5rem 0;display:block;">🌍 Languages</a></li>
+  </ul>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <div class="hero-badge-dot" aria-hidden="true"></div>
+        🇪🇹 Ethiopia's Inclusive Education Platform
+      </div>
+
+      <h1 class="hero-title" id="hero-title">
+        Learning Has<br>
+        <span class="accent">No Barriers</span><br>
+        <span class="eth">ትምህርት ለሁሉም</span>
+      </h1>
+
+      <p class="hero-desc">
+        An inclusive platform for Ethiopian students with disabilities. Learn in Amharic, Afaan Oromo, Tigrinya and English — with sign language support, text-to-speech, screen reader access, and personalized lessons from Grade 1 to University.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary btn-large">
+          🚀 Start Learning Free
+        </a>
+        <a href="#" class="btn-outline btn-large" onclick="playDemo()">
+          🔊 Hear This Page
+        </a>
+      </div>
+
+      <div class="hero-stats" role="list" aria-label="Platform statistics">
+        <div class="hero-stat" role="listitem">
+          <div class="hero-stat-num">12+</div>
+          <div class="hero-stat-label">Grade Levels</div>
+        </div>
+        <div class="hero-stat" role="listitem">
+          <div class="hero-stat-num">5</div>
+          <div class="hero-stat-label">Languages</div>
+        </div>
+        <div class="hero-stat" role="listitem">
+          <div class="hero-stat-num">50+</div>
+          <div class="hero-stat-label">Subjects</div>
+        </div>
+        <div class="hero-stat" role="listitem">
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Accessible</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-phone" role="presentation">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div>
+              <div class="phone-greeting">ደህና ዋልሽ — Good morning</div>
+              <div class="phone-name">Meron Tadesse 👋</div>
+            </div>
+            <div class="phone-avatar">👩🏾</div>
+          </div>
+
+          <div class="phone-subject-card">
+            <div class="phone-subject-label">Currently Learning</div>
+            <div class="phone-subject-name">Mathematics · Grade 9</div>
+            <div class="phone-subject-progress">Chapter 3 — Algebra · 68% complete</div>
+            <div class="phone-progress-bar">
+              <div class="phone-progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="phone-quick-label">Quick Access</div>
+          <div class="phone-quick-grid">
+            <div class="phone-quick-item">
+              <div class="phone-quick-icon">🎧</div>
+              <div class="phone-quick-text">Audio Lesson</div>
+            </div>
+            <div class="phone-quick-item">
+              <div class="phone-quick-icon">🤖</div>
+              <div class="phone-quick-text">AI Tutor</div>
+            </div>
+            <div class="phone-quick-item">
+              <div class="phone-quick-icon">👐</div>
+              <div class="phone-quick-text">Sign Language</div>
+            </div>
+            <div class="phone-quick-item">
+              <div class="phone-quick-icon">📄</div>
+              <div class="phone-quick-text">Textbooks</div>
+            </div>
+          </div>
+
+          <div class="phone-accessibility">
+            <div class="phone-acc-btn">🔊 Audio</div>
+            <div class="phone-acc-btn">📖 Reader</div>
+            <div class="phone-acc-btn">🎤 Voice</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating-card float-card-1">
+        <div class="fc-label">AI Tutor</div>
+        <div class="fc-val"><div class="fc-dot"></div> Answered your question</div>
+      </div>
+
+      <div class="floating-card float-card-2">
+        <div class="fc-label">Progress Today</div>
+        <div class="fc-val">🏆 3 Lessons Done</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESSIBILITY STRIP -->
+<div class="access-strip" role="marquee" aria-label="Accessibility features">
+  <div class="access-strip-inner">
+    <div class="access-scroll" aria-hidden="true">
+      <div class="access-item"><span>🔊</span><span>Text-to-Speech in 5 Languages</span></div>
+      <div class="access-item"><span>👐</span><span>Ethiopian Sign Language Support</span></div>
+      <div class="access-item"><span>📖</span><span>Full Screen Reader Compatible</span></div>
+      <div class="access-item"><span>🎤</span><span>Voice Navigation & Speech Input</span></div>
+      <div class="access-item"><span>🔡</span><span>Dyslexia-Friendly Fonts</span></div>
+      <div class="access-item"><span>◑</span><span>High Contrast Mode</span></div>
+      <div class="access-item"><span>📱</span><span>Mobile-First Design</span></div>
+      <div class="access-item"><span>📶</span><span>Offline Learning Support</span></div>
+      <div class="access-item"><span>🔊</span><span>Text-to-Speech in 5 Languages</span></div>
+      <div class="access-item"><span>👐</span><span>Ethiopian Sign Language Support</span></div>
+      <div class="access-item"><span>📖</span><span>Full Screen Reader Compatible</span></div>
+      <div class="access-item"><span>🎤</span><span>Voice Navigation & Speech Input</span></div>
+      <div class="access-item"><span>🔡</span><span>Dyslexia-Friendly Fonts</span></div>
+      <div class="access-item"><span>◑</span><span>High Contrast Mode</span></div>
+      <div class="access-item"><span>📱</span><span>Mobile-First Design</span></div>
+      <div class="access-item"><span>📶</span><span>Offline Learning Support</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features" aria-labelledby="features-title">
+  <div class="section-header">
+    <div class="section-tag">♿ Why EduAbility</div>
+    <h2 class="section-title" id="features-title">Built for <span class="accent">Every Student</span></h2>
+    <p class="section-desc">A platform designed from the ground up to empower Ethiopian students with disabilities — combining accessibility, local culture, and smart technology.</p>
+  </div>
+
+  <div class="features-grid">
+    <article class="feature-card" tabindex="0">
+      <div class="feature-icon green" aria-hidden="true">👐</div>
+      <h3 class="feature-title">Sign Language Support</h3>
+      <p class="feature-desc">Ethiopian Sign Language (ESL) lessons for deaf students, with animated avatar demonstrations and an interactive ESL dictionary for all subjects.</p>
+    </article>
+
+    <article class="feature-card" tabindex="0">
+      <div class="feature-icon green" aria-hidden="true">🔊</div>
+      <h3 class="feature-title">Audio Learning for Blind Students</h3>
+      <p class="feature-desc">Every lesson is available in high-quality audio narration in Amharic, Afaan Oromo, Tigrinya, and English. Full screen reader and braille display support.</p>
+    </article>
+
+    <article class="feature-card" tabindex="0">
+      <div class="feature-icon yellow" aria-hidden="true">🤖</div>
+      <h3 class="feature-title">Personalized AI Tutor</h3>
+      <p class="feature-desc">An intelligent tutor that adapts to each student's pace, explains concepts simply, generates quizzes, and gives feedback in their preferred language.</p>
+    </article>
+
+    <article class="feature-card" tabindex="0">
+      <div class="feature-icon green" aria-hidden="true">📚</div>
+      <h3 class="feature-title">Ethiopian Curriculum — Grade 1–12</h3>
+      <p class="feature-desc">All subjects aligned with the Ethiopian Ministry of Education curriculum, including textbook PDFs, interactive lessons, and national exam preparation.</p>
+    </article>
+
+    <article class="feature-card" tabindex="0">
+      <div class="feature-icon yellow" aria-hidden="true">📶</div>
+      <h3 class="feature-title">Offline Mode for Rural Areas</h3>
+      <p class="feature-desc">Download lessons and textbooks for offline use — critical for students in rural Ethiopia with limited internet access. Low-bandwidth mode available.</p>
+    </article>
+
+    <article class="feature-card" tabindex="0">
+      <div class="feature-icon red" aria-hidden="true">🗣️</div>
+      <h3 class="feature-title">Speech-to-Text Input</h3>
+      <p class="feature-desc">Students who cannot type can speak their answers and questions. Supports Amharic and English voice input for all assignments and AI tutor interactions.</p>
+    </article>
+
+    <article class="feature-card" tabindex="0">
+      <div class="feature-icon green" aria-hidden="true">📅</div>
+      <h3 class="feature-title">Ethiopian Calendar Integration</h3>
+      <p class="feature-desc">Fully integrated Ethiopian calendar (Ge'ez calendar) with Ethiopian time format support and alignment to the Ethiopian school year and holidays.</p>
+    </article>
+
+    <article class="feature-card" tabindex="0">
+      <div class="feature-icon yellow" aria-hidden="true">🏆</div>
+      <h3 class="feature-title">Gamified Learning</h3>
+      <p class="feature-desc">Earn badges, points, and certificates as you learn. Inclusive game mechanics designed so all students — regardless of disability — can participate and excel.</p>
+    </article>
+
+    <article class="feature-card" tabindex="0">
+      <div class="feature-icon red" aria-hidden="true">👨‍🏫</div>
+      <h3 class="feature-title">Teacher & Parent Dashboards</h3>
+      <p class="feature-desc">Teachers can assign lessons, track student progress, and communicate with parents. Parents can monitor their child's learning journey in real time.</p>
+    </article>
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<section class="subjects-section" id="subjects" aria-labelledby="subjects-title">
+  <div class="subjects-inner">
+    <div class="section-header">
+      <div class="section-tag">📚 Ethiopian Curriculum</div>
+      <h2 class="section-title" id="subjects-title">All Subjects, <span class="accent">All Grades</span></h2>
+      <p class="section-desc">Grade 1 through 12 covering all Ministry of Education subjects, available in multiple Ethiopian languages.</p>
+    </div>
+
+    <div class="grade-tabs" role="tablist" aria-label="Select grade range">
+      <button class="grade-tab active" role="tab" aria-selected="true" onclick="selectGrade(this)">Primary (1–4)</button>
+      <button class="grade-tab" role="tab" aria-selected="false" onclick="selectGrade(this)">Upper Primary (5–8)</button>
+      <button class="grade-tab" role="tab" aria-selected="false" onclick="selectGrade(this)">Secondary (9–10)</button>
+      <button class="grade-tab" role="tab" aria-selected="false" onclick="selectGrade(this)">Preparatory (11–12)</button>
+      <button class="grade-tab" role="tab" aria-selected="false" onclick="selectGrade(this)">University Prep</button>
+    </div>
+
+    <div class="subjects-grid" role="list">
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">🔢</div>
+        <div class="subject-name">Mathematics</div>
+        <div class="subject-grade">ሒሳብ · Herrega</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">🇬🇧</div>
+        <div class="subject-name">English</div>
+        <div class="subject-grade">All Grades</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">🔬</div>
+        <div class="subject-name">Biology</div>
+        <div class="subject-grade">ባዮሎጂ</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">⚛️</div>
+        <div class="subject-name">Physics</div>
+        <div class="subject-grade">ፊዚክስ</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">🧪</div>
+        <div class="subject-name">Chemistry</div>
+        <div class="subject-grade">ኬሚስትሪ</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">💻</div>
+        <div class="subject-name">ICT</div>
+        <div class="subject-grade">Grades 5–12</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">🏛️</div>
+        <div class="subject-name">History</div>
+        <div class="subject-grade">ታሪክ</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">🌍</div>
+        <div class="subject-name">Geography</div>
+        <div class="subject-grade">ጂኦግራፊ</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">🏛️</div>
+        <div class="subject-name">Civics</div>
+        <div class="subject-grade">ሲቪክ</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">🇪🇹</div>
+        <div class="subject-name">Amharic</div>
+        <div class="subject-grade">አማርኛ</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">🌿</div>
+        <div class="subject-name">Afaan Oromo</div>
+        <div class="subject-grade">Afaanii Oromoo</div>
+      </a>
+      <a href="#" class="subject-card" role="listitem" tabindex="0">
+        <div class="subject-icon">📜</div>
+        <div class="subject-name">Tigrinya</div>
+        <div class="subject-grade">ትግርኛ</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- AI TUTOR -->
+<section class="ai-section" id="ai-tutor" aria-labelledby="ai-title">
+  <div class="ai-grid">
+    <div class="ai-chat-demo" role="region" aria-label="AI Tutor demonstration">
+      <div class="chat-header">
+        <div class="chat-avatar" aria-hidden="true">🤖</div>
+        <div class="chat-info">
+          <h4>Selam — Your AI Tutor</h4>
+          <p>ሰላም · Responds in your language</p>
+        </div>
+        <div class="chat-online">
+          <div class="chat-online-dot" aria-hidden="true"></div>
+          Always available
+        </div>
+      </div>
+
+      <div class="chat-messages" aria-live="polite" aria-label="Chat conversation">
+        <div class="chat-msg" role="article">
+          <div class="chat-msg-avatar" aria-label="AI Tutor">🤖</div>
+          <div class="chat-bubble">ሰላም! I'm Selam, your learning assistant. What subject would you like help with today? I speak Amharic, Afaan Oromo, Tigrinya, and English! 🌟</div>
+        </div>
+        <div class="chat-msg user" role="article">
+          <div class="chat-msg-avatar" aria-label="You">👩🏾</div>
+          <div class="chat-bubble">Can you explain quadratic equations in simple terms?</div>
+        </div>
+        <div class="chat-msg" role="article">
+          <div class="chat-msg-avatar" aria-label="AI Tutor">🤖</div>
+          <div class="chat-bubble">Of course! A quadratic equation is like asking: "what number, when multiplied by itself and added to other parts, equals zero?" For example: x² + 5x + 6 = 0. Would you like me to read this aloud? 🔊</div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <input class="chat-input" type="text" id="chatInput" placeholder="Type or speak your question..." aria-label="Type your question" onkeypress="handleChat(event)"/>
+        <button class="chat-send-btn" onclick="sendChat()" aria-label="Send message">➤</button>
+        <button class="chat-send-btn" style="background:var(--gold)" onclick="voiceInput()" aria-label="Voice input">🎤</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-tag" style="display:inline-flex;margin-bottom:1.25rem">🤖 AI Learning System</div>
+      <h2 class="section-title" style="text-align:left;margin-bottom:1rem">Meet <span class="accent">Selam</span><br>Your Personal Tutor</h2>
+      <p style="color:var(--text-muted);margin-bottom:2rem;font-size:0.95rem">Selam adapts to your learning style, speaks your language, and is available 24/7. No judge, only support — every question is welcome.</p>
+
+      <ul class="ai-features-list" role="list">
+        <li class="ai-feature-item" role="listitem">
+          <div class="ai-feature-icon" aria-hidden="true">📝</div>
+          <div>
+            <div class="ai-feature-title">Homework Helper</div>
+            <div class="ai-feature-desc">Explains every step clearly, never just gives answers — builds real understanding.</div>
+          </div>
+        </li>
+        <li class="ai-feature-item" role="listitem">
+          <div class="ai-feature-icon" aria-hidden="true">📊</div>
+          <div>
+            <div class="ai-feature-title">Quiz Generator</div>
+            <div class="ai-feature-desc">Auto-generates practice questions from any chapter, with Ethiopian exam-style formatting.</div>
+          </div>
+        </li>
+        <li class="ai-feature-item" role="listitem">
+          <div class="ai-feature-icon" aria-hidden="true">🌍</div>
+          <div>
+            <div class="ai-feature-title">Multilingual Translation</div>
+            <div class="ai-feature-desc">Instantly translates between Amharic, Afaan Oromo, Tigrinya, and English within lessons.</div>
+          </div>
+        </li>
+        <li class="ai-feature-item" role="listitem">
+          <div class="ai-feature-icon" aria-hidden="true">📈</div>
+          <div>
+            <div class="ai-feature-title">Progress Tracking</div>
+            <div class="ai-feature-desc">Smart revision planner based on Ethiopian exam dates and your personal weak areas.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING MODES -->
+<section class="modes-section" id="learning-modes" aria-labelledby="modes-title">
+  <div class="modes-inner">
+    <div class="section-header">
+      <div class="section-tag">🎯 Inclusive by Design</div>
+      <h2 class="section-title" id="modes-title">Learn Your <span class="accent">Own Way</span></h2>
+      <p class="section-desc">Multiple learning modes so every student — regardless of disability — can access education comfortably.</p>
+    </div>
+
+    <div class="modes-grid" role="list">
+      <article class="mode-card" role="listitem" tabindex="0">
+        <div class="mode-icon">🎧</div>
+        <h3 class="mode-title">Audio Mode</h3>
+        <p class="mode-desc">Every lesson is narrated in full. For blind and visually impaired students — no screen reading required.</p>
+        <div class="mode-badge">For Blind Students</div>
+      </article>
+
+      <article class="mode-card" role="listitem" tabindex="0">
+        <div class="mode-icon">👐</div>
+        <h3 class="mode-title">Sign Language Mode</h3>
+        <p class="mode-desc">Ethiopian Sign Language avatar demonstrates concepts. Subtitles appear for all videos automatically.</p>
+        <div class="mode-badge">For Deaf Students</div>
+      </article>
+
+      <article class="mode-card" role="listitem" tabindex="0">
+        <div class="mode-icon">🧩</div>
+        <h3 class="mode-title">Simplified Mode</h3>
+        <p class="mode-desc">Lessons are broken into very small steps with simple language. Extra visual cues and repetition.</p>
+        <div class="mode-badge">Cognitive Support</div>
+      </article>
+
+      <article class="mode-card" role="listitem" tabindex="0">
+        <div class="mode-icon">🎮</div>
+        <h3 class="mode-title">Gamified Mode</h3>
+        <p class="mode-desc">Earn points, badges, and unlock new content. Fully keyboard-accessible. Motivating for all learners.</p>
+        <div class="mode-badge">Engagement</div>
+      </article>
+
+      <article class="mode-card" role="listitem" tabindex="0">
+        <div class="mode-icon">📵</div>
+        <h3 class="mode-title">Offline Mode</h3>
+        <p class="mode-desc">Download lessons and textbooks. Works without internet — perfect for rural Ethiopian communities.</p>
+        <div class="mode-badge">Low Bandwidth</div>
+      </article>
+
+      <article class="mode-card" role="listitem" tabindex="0">
+        <div class="mode-icon">🖐️</div>
+        <h3 class="mode-title">Voice-Only Mode</h3>
+        <p class="mode-desc">Navigate the entire platform, ask questions, and submit answers using only your voice. No typing needed.</p>
+        <div class="mode-badge">Speech Difficulties</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section class="lang-section" id="languages" aria-labelledby="lang-title">
+  <div class="section-header">
+    <div class="section-tag">🌍 Ethiopian Languages</div>
+    <h2 class="section-title" id="lang-title">Learn in Your <span class="accent">Mother Tongue</span></h2>
+    <p class="section-desc">Content is available in Ethiopia's main languages. Your language is a strength, not a barrier.</p>
+  </div>
+
+  <div class="lang-grid" role="list">
+    <div class="lang-card" role="listitem" tabindex="0">
+      <div class="lang-flag" style="background:#E8F5E9" aria-hidden="true">🇪🇹</div>
+      <div>
+        <div class="lang-name">Amharic</div>
+        <div class="lang-native">አማርኛ</div>
+        <div class="lang-students">40M+ speakers · Full support</div>
+      </div>
+    </div>
+    <div class="lang-card" role="listitem" tabindex="0">
+      <div class="lang-flag" style="background:#FFF8E1" aria-hidden="true">🌿</div>
+      <div>
+        <div class="lang-name">Afaan Oromo</div>
+        <div class="lang-native">Afaanii Oromoo</div>
+        <div class="lang-students">35M+ speakers · Full support</div>
+      </div>
+    </div>
+    <div class="lang-card" role="listitem" tabindex="0">
+      <div class="lang-flag" style="background:#E3F2FD" aria-hidden="true">📜</div>
+      <div>
+        <div class="lang-name">Tigrinya</div>
+        <div class="lang-native">ትግርኛ</div>
+        <div class="lang-students">7M+ speakers · Full support</div>
+      </div>
+    </div>
+    <div class="lang-card" role="listitem" tabindex="0">
+      <div class="lang-flag" style="background:#FCE4EC" aria-hidden="true">🌙</div>
+      <div>
+        <div class="lang-name">Somali</div>
+        <div class="lang-native">Af Soomaali</div>
+        <div class="lang-students">6M+ speakers · Core subjects</div>
+      </div>
+    </div>
+    <div class="lang-card" role="listitem" tabindex="0">
+      <div class="lang-flag" style="background:#F3E5F5" aria-hidden="true">🇬🇧</div>
+      <div>
+        <div class="lang-name">English</div>
+        <div class="lang-native">English</div>
+        <div class="lang-students">National exam language · Full support</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESSIBILITY CENTER -->
+<section class="acc-section" id="accessibility" aria-labelledby="acc-title">
+  <div class="acc-inner">
+    <div class="section-header">
+      <div class="section-tag">♿ Accessibility Center</div>
+      <h2 class="section-title" id="acc-title">Tools Built for <span class="accent">You</span></h2>
+      <p class="section-desc">No student is left behind. Every tool here is designed around the real needs of Ethiopian students with disabilities.</p>
+    </div>
+
+    <div class="acc-grid" role="list">
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">📖</div>
+        <div class="acc-item-name">Screen Reader</div>
+        <div class="acc-item-desc">Full NVDA & JAWS compatibility</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">🔊</div>
+        <div class="acc-item-name">Text-to-Speech</div>
+        <div class="acc-item-desc">5 languages, natural voice</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">🎤</div>
+        <div class="acc-item-name">Speech-to-Text</div>
+        <div class="acc-item-desc">Voice input for answers</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">👐</div>
+        <div class="acc-item-name">Sign Language</div>
+        <div class="acc-item-desc">Ethiopian Sign Language (ESL)</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">⌨️</div>
+        <div class="acc-item-name">Keyboard Navigation</div>
+        <div class="acc-item-desc">Complete keyboard-only access</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">🔡</div>
+        <div class="acc-item-name">Dyslexia Font</div>
+        <div class="acc-item-desc">OpenDyslexic available</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">A+</div>
+        <div class="acc-item-name">Font Resizing</div>
+        <div class="acc-item-desc">From 100% up to 200%</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">◑</div>
+        <div class="acc-item-name">High Contrast</div>
+        <div class="acc-item-desc">WCAG AAA compliant</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">🌙</div>
+        <div class="acc-item-name">Dark Mode</div>
+        <div class="acc-item-desc">Reduces eye strain</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">📹</div>
+        <div class="acc-item-name">Subtitles</div>
+        <div class="acc-item-desc">Auto-generated video captions</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">🖼️</div>
+        <div class="acc-item-name">Image Descriptions</div>
+        <div class="acc-item-desc">Audio alt-text for all images</div>
+      </div>
+      <div class="acc-item" role="listitem" tabindex="0">
+        <div class="acc-item-icon" aria-hidden="true">📵</div>
+        <div class="acc-item-name">Offline Mode</div>
+        <div class="acc-item-desc">No internet needed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section" aria-label="Platform impact statistics">
+  <div class="stats-inner" role="list">
+    <div class="stat-item" role="listitem">
+      <div class="stat-num">50,000+</div>
+      <div class="stat-label">Students Reached</div>
+    </div>
+    <div class="stat-item" role="listitem">
+      <div class="stat-num">11</div>
+      <div class="stat-label">Subjects Covered</div>
+    </div>
+    <div class="stat-item" role="listitem">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Grade Levels</div>
+    </div>
+    <div class="stat-item" role="listitem">
+      <div class="stat-num">9</div>
+      <div class="stat-label">Regions of Ethiopia</div>
+    </div>
+    <div class="stat-item" role="listitem">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Free to Use</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="community" aria-labelledby="test-title">
+  <div class="section-header">
+    <div class="section-tag">💬 Student Stories</div>
+    <h2 class="section-title" id="test-title">Voices from <span class="accent">Ethiopia</span></h2>
+    <p class="section-desc">Real students, teachers, and parents sharing how EduAbility changed their learning journey.</p>
+  </div>
+
+  <div class="testimonials-grid" role="list">
+    <article class="testimonial-card" role="listitem" tabindex="0">
+      <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+      <p class="testimonial-text">"The sign language mode helped me understand mathematics for the first time. Before EduAbility, I missed so much because there were no interpreters at my school in Mekele."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" aria-hidden="true">H</div>
+        <div>
+          <div class="testimonial-name">Haben Tesfay</div>
+          <div class="testimonial-role">Deaf student, Grade 10, Mekele</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="testimonial-card" role="listitem" tabindex="0">
+      <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+      <p class="testimonial-text">"My daughter lost her sight at age 8. We thought her education was over. With the audio lessons in Amharic, she now tops her class in Biology and English."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:var(--gold)" aria-hidden="true">M</div>
+        <div>
+          <div class="testimonial-name">Meseret Alemu</div>
+          <div class="testimonial-role">Parent, Addis Ababa</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="testimonial-card" role="listitem" tabindex="0">
+      <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+      <p class="testimonial-text">"As a teacher in a rural school in Oromia, I use EduAbility in Afaan Oromo for my students with learning disabilities. The simplified mode is exactly what they needed."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:#1565C0" aria-hidden="true">B</div>
+        <div>
+          <div class="testimonial-name">Bikila Gudeta</div>
+          <div class="testimonial-role">Teacher, Jimma, Oromia</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" aria-labelledby="cta-title">
+  <div class="cta-inner">
+    <div class="cta-eth-text">ትምህርት መብትዎ ነው — Education is your right</div>
+    <h2 class="cta-title" id="cta-title">Ready to Start Your<br><span style="color:var(--green)">Learning Journey?</span></h2>
+    <p class="cta-desc">Join thousands of Ethiopian students with disabilities who are learning every day — free, accessible, and in their own language.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-primary btn-large">
+        🚀 Create Free Account
+      </a>
+      <a href="#" class="btn-outline btn-large">
+        📚 Explore Subjects
+      </a>
+    </div>
+    <p style="font-size:12px;color:var(--text-light);margin-top:1.5rem">Free forever for students · No ads · Works offline · All disabilities welcome</p>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.75rem">
+          <div style="width:36px;height:36px;background:var(--green);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px" aria-hidden="true">📚</div>
+          <div class="footer-brand-name">EduAbility Ethiopia</div>
+        </div>
+        <p class="footer-brand-desc">Empowering Ethiopian students with disabilities through inclusive technology, local language support, and personalized learning. Education has no boundaries.</p>
+        <div class="footer-eth">ለሁሉም ትምህርት — Baruumsa Hundaaf — ትምህርቲ ንኹሉ</div>
+        <div style="margin-top:1rem">
+          <div class="eth-flag" aria-label="Ethiopian flag colors">
+            <span class="flag-g" title="Green"></span>
+            <span class="flag-y" title="Yellow"></span>
+            <span class="flag-r" title="Red"></span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <ul class="footer-links">
+          <li><a href="#">Subjects</a></li>
+          <li><a href="#">AI Tutor</a></li>
+          <li><a href="#">Textbook Library</a></li>
+          <li><a href="#">Video Lessons</a></li>
+          <li><a href="#">Practice Exams</a></li>
+          <li><a href="#">Sign Language</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">For You</div>
+        <ul class="footer-links">
+          <li><a href="#">Student Dashboard</a></li>
+          <li><a href="#">Teacher Portal</a></li>
+          <li><a href="#">Parent Portal</a></li>
+          <li><a href="#">School Directory</a></li>
+          <li><a href="#">Scholarships</a></li>
+          <li><a href="#">Community Forum</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="#">Accessibility Help</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Report Issue</a></li>
+          <li><a href="#">Ministry of Education</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 EduAbility Ethiopia · Free & Accessible for All Ethiopian Students</p>
+      <div style="display:flex;gap:0.75rem;align-items:center">
+        <span style="font-size:12px;color:rgba(255,255,255,0.5)">🇪🇹 Made in Ethiopia</span>
+        <a href="#" style="color:rgba(255,255,255,0.5);font-size:12px;text-decoration:none">Accessibility Statement</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- TTS Announcement region for screen readers -->
+<div id="ttsAnnounce" aria-live="assertive" aria-atomic="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"></div>
+
+<script>
+var ttsActive = false;
+var fontLevel = 0;
+var highContrast = false;
+var dyslexia = false;
+var synth = window.speechSynthesis;
+var currentUtterance = null;
+
+function toggleTheme() {
+  var body = document.body;
+  var btn = document.getElementById('themeToggle');
+  if (body.getAttribute('data-theme') === 'dark') {
+    body.removeAttribute('data-theme');
+    btn.textContent = '🌙';
+    announce('Light mode enabled');
+  } else {
+    body.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️';
+    announce('Dark mode enabled');
+  }
+}
+
+function toggleTTS() {
+  ttsActive = !ttsActive;
+  var btn = document.getElementById('ttsBtn');
+  btn.classList.toggle('active', ttsActive);
+  if (ttsActive) {
+    announce('Text to speech enabled. Hover over text to hear it.');
+    document.body.addEventListener('mouseover', handleTTSHover);
+  } else {
+    if (synth) synth.cancel();
+    document.body.removeEventListener('mouseover', handleTTSHover);
+    announce('Text to speech disabled');
+  }
+}
+
+function handleTTSHover(e) {
+  var el = e.target;
+  var text = el.innerText || el.textContent;
+  if (text && text.trim().length > 3 && el.tagName !== 'BODY' && el.tagName !== 'NAV') {
+    if (synth) {
+      synth.cancel();
+      var utt = new SpeechSynthesisUtterance(text.trim().slice(0, 200));
+      utt.lang = 'en-US';
+      synth.speak(utt);
+    }
+  }
+}
+
+function playDemo() {
+  if (synth) {
+    synth.cancel();
+    var text = 'Welcome to EduAbility Ethiopia — an inclusive education platform for Ethiopian students with disabilities. We support deaf, blind, mute, and visually impaired students with full accessibility tools in Amharic, Afaan Oromo, Tigrinya, and English.';
+    var utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'en-US';
+    utt.rate = 0.9;
+    synth.speak(utt);
+    announce('Playing audio description of the page');
+  }
+}
+
+function cycleFontSize() {
+  fontLevel = (fontLevel + 1) % 3;
+  var sizes = ['16px', '20px', '24px'];
+  var labels = ['Normal', 'Large', 'Extra Large'];
+  document.documentElement.style.fontSize = sizes[fontLevel];
+  announce('Font size set to ' + labels[fontLevel]);
+}
+
+function toggleContrast() {
+  highContrast = !highContrast;
+  var btn = document.getElementById('contrastBtn');
+  btn.classList.toggle('active', highContrast);
+  if (highContrast) {
+    document.documentElement.style.setProperty('--text', '#000000');
+    document.documentElement.style.setProperty('--bg', '#ffffff');
+    document.documentElement.style.setProperty('--white', '#ffffff');
+    announce('High contrast mode enabled');
+  } else {
+    document.documentElement.style.removeProperty('--text');
+    document.documentElement.style.removeProperty('--bg');
+    document.documentElement.style.removeProperty('--white');
+    announce('High contrast mode disabled');
+  }
+}
+
+function toggleDyslexia() {
+  dyslexia = !dyslexia;
+  if (dyslexia) {
+    document.body.style.fontFamily = '"Comic Sans MS", "OpenDyslexic", cursive';
+    document.body.style.letterSpacing = '0.05em';
+    document.body.style.wordSpacing = '0.1em';
+    announce('Dyslexia-friendly font enabled');
+  } else {
+    document.body.style.fontFamily = '';
+    document.body.style.letterSpacing = '';
+    document.body.style.wordSpacing = '';
+    announce('Standard font restored');
+  }
+}
+
+function toggleMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var btn = document.querySelector('.hamburger');
+  if (menu.style.display === 'none') {
+    menu.style.display = 'block';
+    btn.setAttribute('aria-expanded', 'true');
+  } else {
+    menu.style.display = 'none';
+    btn.setAttribute('aria-expanded', 'false');
+  }
+}
+
+function activateSpeech() {
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    var recog = new SR();
+    recog.lang = 'en-US';
+    recog.onresult = function(e) {
+      var cmd = e.results[0][0].transcript.toLowerCase();
+      announce('Voice command heard: ' + cmd);
+      if (cmd.includes('dark')) toggleTheme();
+      else if (cmd.includes('read') || cmd.includes('speech')) toggleTTS();
+      else if (cmd.includes('larger') || cmd.includes('bigger')) cycleFontSize();
+      else if (cmd.includes('math')) window.location.hash = '#subjects';
+      else if (cmd.includes('tutor')) window.location.hash = '#ai-tutor';
+    };
+    recog.start();
+    announce('Voice navigation activated. Say a command like "dark mode", "read page", or "open subjects"');
+  } else {
+    announce('Voice navigation is not supported in this browser');
+  }
+}
+
+function selectGrade(btn) {
+  document.querySelectorAll('.grade-tab').forEach(function(t) {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
+  announce('Selected grade range: ' + btn.textContent);
+}
+
+function handleChat(e) {
+  if (e.key === 'Enter') sendChat();
+}
+
+function sendChat() {
+  var input = document.getElementById('chatInput');
+  var val = input.value.trim();
+  if (!val) return;
+  var msgs = document.querySelector('.chat-messages');
+
+  var userMsg = document.createElement('div');
+  userMsg.className = 'chat-msg user';
+  userMsg.innerHTML = '<div class="chat-msg-avatar" aria-label="You">👩🏾</div><div class="chat-bubble">' + val + '</div>';
+  msgs.appendChild(userMsg);
+
+  input.value = '';
+  msgs.scrollTop = msgs.scrollHeight;
+
+  setTimeout(function() {
+    var aiMsg = document.createElement('div');
+    aiMsg.className = 'chat-msg';
+    var responses = [
+      "Great question! Let me explain that step by step. Remember, every question makes you smarter — keep asking! 🌟",
+      "ሰላም! I understand your question. Here's a simple explanation: this concept is like... Would you like me to say this in Amharic? 🔊",
+      "Excellent! Let's break this down together. First, let's understand the basics... Would you like a practice quiz after? 📝",
+      "I'm happy to help! This is a very important topic for your Ethiopian national exam. Let me summarize the key points... 📚"
+    ];
+    var reply = responses[Math.floor(Math.random() * responses.length)];
+    aiMsg.innerHTML = '<div class="chat-msg-avatar" aria-label="AI Tutor">🤖</div><div class="chat-bubble">' + reply + '</div>';
+    msgs.appendChild(aiMsg);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    if (ttsActive && synth) {
+      var utt = new SpeechSynthesisUtterance(reply);
+      utt.lang = 'en-US';
+      synth.speak(utt);
+    }
+  }, 1000);
+}
+
+function voiceInput() {
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    var r = new SR();
+    r.lang = 'en-US';
+    r.onresult = function(e) {
+      document.getElementById('chatInput').value = e.results[0][0].transcript;
+    };
+    r.start();
+    announce('Listening... speak your question');
+  }
+}
+
+function announce(msg) {
+  var el = document.getElementById('ttsAnnounce');
+  el.textContent = '';
+  setTimeout(function() { el.textContent = msg; }, 50);
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+      target.focus({ preventScroll: true });
+    }
+  });
+});
+
+// Intersection observer for animations
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.feature-card, .mode-card, .subject-card, .acc-item, .lang-card, .testimonial-card').forEach(function(el) {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
