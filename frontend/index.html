@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DroneMapper Ethiopia - Agricultural Drone Monitoring</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .drone-status {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-cyan-600 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="text-3xl">🚁</div>
+                    <div>
+                        <h1 class="text-3xl font-bold">DroneMapper Ethiopia</h1>
+                        <p class="text-blue-100">Agricultural Monitoring System</p>
+                    </div>
+                </div>
+                <div id="connection-status" class="flex items-center space-x-2">
+                    <div class="w-3 h-3 bg-green-400 rounded-full drone-status"></div>
+                    <span id="status-text">Connected</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-slate-700 rounded-lg p-6 border-l-4 border-green-500">
+                <p class="text-slate-300 text-sm font-semibold">Drone Status</p>
+                <p id="drone-battery" class="text-3xl font-bold mt-2">100%</p>
+                <p class="text-xs text-slate-400 mt-1">Battery Level</p>
+            </div>
+            <div class="bg-slate-700 rounded-lg p-6 border-l-4 border-blue-500">
+                <p class="text-slate-300 text-sm font-semibold">Altitude</p>
+                <p id="drone-altitude" class="text-3xl font-bold mt-2">0 m</p>
+                <p class="text-xs text-slate-400 mt-1">Current Height</p>
+            </div>
+            <div class="bg-slate-700 rounded-lg p-6 border-l-4 border-yellow-500">
+                <p class="text-slate-300 text-sm font-semibold">NDVI Score</p>
+                <p id="ndvi-score" class="text-3xl font-bold mt-2">0.65</p>
+                <p class="text-xs text-slate-400 mt-1">Crop Health</p>
+            </div>
+            <div class="bg-slate-700 rounded-lg p-6 border-l-4 border-purple-500">
+                <p class="text-slate-300 text-sm font-semibold">Active Missions</p>
+                <p id="active-missions" class="text-3xl font-bold mt-2">0</p>
+                <p class="text-xs text-slate-400 mt-1">In Progress</p>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            <!-- Drone Controls -->
+            <div class="lg:col-span-2 bg-slate-700 rounded-lg p-6 border border-slate-600">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span class="mr-2">🎮</span> Drone Controls
+                </h2>
+                
+                <div class="space-y-4">
+                    <!-- Arm/Disarm -->
+                    <div class="flex gap-3">
+                        <button onclick="armDrone()" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition">
+                            ✓ Arm Drone
+                        </button>
+                        <button onclick="disarmDrone()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition">
+                            ✗ Disarm
+                        </button>
+                        <button onclick="rtl()" class="flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 rounded-lg transition">
+                            🏠 Return to Launch
+                        </button>
+                    </div>
+
+                    <!-- Mission Planning -->
+                    <div class="bg-slate-800 rounded-lg p-4">
+                        <h3 class="font-semibold mb-3">📍 Create Mission</h3>
+                        <div class="space-y-3">
+                            <input type="text" id="mission-name" placeholder="Mission Name" class="w-full bg-slate-900 border border-slate-600 rounded px-3 py-2 text-white">
+                            <div class="grid grid-cols-2 gap-3">
+                                <input type="number" id="mission-lat" placeholder="Latitude" class="bg-slate-900 border border-slate-600 rounded px-3 py-2 text-white" value="9.0320">
+                                <input type="number" id="mission-lon" placeholder="Longitude" class="bg-slate-900 border border-slate-600 rounded px-3 py-2 text-white" value="38.7469">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <input type="number" id="mission-alt" placeholder="Altitude (m)" class="bg-slate-900 border border-slate-600 rounded px-3 py-2 text-white" value="50">
+                                <input type="number" id="mission-spacing" placeholder="Grid Spacing (m)" class="bg-slate-900 border border-slate-600 rounded px-3 py-2 text-white" value="20">
+                            </div>
+                            <button onclick="createMission()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded transition">
+                                Create & Start Mission
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Panel -->
+            <div class="bg-slate-700 rounded-lg p-6 border border-slate-600">
+                <h2 class="text-2xl font-bold mb-4">📊 System Status</h2>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Armed:</span>
+                        <span id="status-armed" class="text-red-400 font-semibold">No</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Flying:</span>
+                        <span id="status-flying" class="text-red-400 font-semibold">No</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Lat/Lon:</span>
+                        <span id="status-coords" class="text-cyan-400 font-mono text-xs">9.03, 38.74</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Speed:</span>
+                        <span id="status-speed" class="text-yellow-400">0.0 m/s</span>
+                    </div>
+                    <hr class="border-slate-600 my-3">
+                    <div class="bg-slate-800 rounded p-3">
+                        <p class="text-slate-400 text-xs mb-2">Latest Activity:</p>
+                        <p id="latest-activity" class="text-slate-300 text-xs">System initialized</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission Map and Analysis -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Map -->
+            <div class="bg-slate-700 rounded-lg p-6 border border-slate-600">
+                <h2 class="text-xl font-bold mb-4">🗺️ Mission Map</h2>
+                <div id="map" class="rounded-lg"></div>
+                <div id="map-info" class="text-sm text-slate-300 mt-3">
+                    <p>🟢 Drone Position | 🔵 Waypoints | 🟡 Coverage Area</p>
+                </div>
+            </div>
+
+            <!-- Analysis Results -->
+            <div class="bg-slate-700 rounded-lg p-6 border border-slate-600">
+                <h2 class="text-xl font-bold mb-4">📈 Crop Analysis</h2>
+                <div class="space-y-4">
+                    <div class="bg-slate-800 rounded-lg p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-slate-300">NDVI (Vegetation Index)</span>
+                            <span id="ndvi-value" class="text-2xl font-bold text-green-400">0.65</span>
+                        </div>
+                        <div class="w-full bg-slate-900 rounded-full h-2">
+                            <div id="ndvi-bar" class="bg-green-500 h-2 rounded-full" style="width: 65%"></div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">✅ Excellent crop health</p>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-lg p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-slate-300">Disease Detection</span>
+                            <span id="disease-status" class="text-green-400 font-semibold">No Disease Detected</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Confidence: <span id="disease-confidence">0%</span></p>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-lg p-4">
+                        <h3 class="text-slate-300 font-semibold mb-2">📋 Recommendations</h3>
+                        <ul id="recommendations" class="text-xs text-slate-400 space-y-1">
+                            <li>✅ Continue current maintenance schedule</li>
+                            <li>✅ Monitor for over-watering</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-slate-700 rounded-lg p-6 border border-slate-600">
+                <h2 class="text-xl font-bold mb-4">📊 Battery Over Time</h2>
+                <canvas id="batteryChart"></canvas>
+            </div>
+            <div class="bg-slate-700 rounded-lg p-6 border border-slate-600">
+                <h2 class="text-xl font-bold mb-4">📍 Altitude Profile</h2>
+                <canvas id="altitudeChart"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-700 mt-12 py-6">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-400 text-sm">
+            <p>🚁 DroneMapper Ethiopia | INSA Summer Camp 2026 | Aerospace Engineering</p>
+            <p class="mt-2">Agricultural Monitoring System for Ethiopian Farmers</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([9.0320, 38.7469], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        let droneMarker = null;
+        let waypointMarkers = [];
+
+        // API Base URL
+        const API_URL = 'http://localhost:8000';
+
+        // Update drone status
+        async function updateStatus() {
+            try {
+                const response = await fetch(`${API_URL}/drone/status`);
+                const data = await response.json();
+                
+                document.getElementById('drone-battery').textContent = Math.round(data.battery) + '%';
+                document.getElementById('drone-altitude').textContent = Math.round(data.altitude) + ' m';
+                document.getElementById('status-armed').textContent = data.armed ? '✓ Yes' : '✗ No';
+                document.getElementById('status-armed').className = data.armed ? 'text-green-400 font-semibold' : 'text-red-400 font-semibold';
+                document.getElementById('status-flying').textContent = data.flying ? '✓ Yes' : '✗ No';
+                document.getElementById('status-flying').className = data.flying ? 'text-green-400 font-semibold' : 'text-red-400 font-semibold';
+                document.getElementById('status-coords').textContent = data.latitude.toFixed(4) + ', ' + data.longitude.toFixed(4);
+                document.getElementById('status-speed').textContent = data.speed.toFixed(1) + ' m/s';
+                
+                // Update marker
+                if (!droneMarker) {
+                    droneMarker = L.circleMarker([data.latitude, data.longitude], {
+                        radius: 8,
+                        fillColor: '#00ff00',
+                        color: '#00ff00',
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    }).addTo(map).bindPopup('Drone Position');
+                } else {
+                    droneMarker.setLatLng([data.latitude, data.longitude]);
+                }
+            } catch (error) {
+                console.error('Error updating status:', error);
+            }
+        }
+
+        // Arm drone
+        async function armDrone() {
+            try {
+                const response = await fetch(`${API_URL}/drone/arm`, { method: 'POST' });
+                const data = await response.json();
+                alert('✓ ' + data.message);
+                updateStatus();
+            } catch (error) {
+                alert('✗ Error: ' + error.message);
+            }
+        }
+
+        // Disarm drone
+        async function disarmDrone() {
+            try {
+                const response = await fetch(`${API_URL}/drone/disarm`, { method: 'POST' });
+                const data = await response.json();
+                alert('✓ ' + data.message);
+                updateStatus();
+            } catch (error) {
+                alert('✗ Error: ' + error.message);
+            }
+        }
+
+        // Return to launch
+        async function rtl() {
+            try {
+                const response = await fetch(`${API_URL}/drone/rtl`, { method: 'POST' });
+                const data = await response.json();
+                alert('✓ ' + data.message);
+                updateStatus();
+            } catch (error) {
+                alert('✗ Error: ' + error.message);
+            }
+        }
+
+        // Create mission
+        async function createMission() {
+            const config = {
+                mission_name: document.getElementById('mission-name').value,
+                latitude: parseFloat(document.getElementById('mission-lat').value),
+                longitude: parseFloat(document.getElementById('mission-lon').value),
+                altitude: parseInt(document.getElementById('mission-alt').value),
+                grid_spacing: parseInt(document.getElementById('mission-spacing').value),
+                speed: 10
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/missions/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+                const data = await response.json();
+                
+                alert(`✓ Mission created!\nWaypoints: ${data.waypoints}\nEstimated time: ${data.estimated_time} min`);
+                
+                // Clear waypoints
+                waypointMarkers.forEach(m => map.removeLayer(m));
+                waypointMarkers = [];
+                
+                // Add waypoints to map
+                data.mission_data.waypoints.forEach((wp, i) => {
+                    const marker = L.marker([wp.lat, wp.lon]).addTo(map);
+                    marker.bindPopup(`WP ${i + 1}`);
+                    waypointMarkers.push(marker);
+                });
+                
+                // Start mission
+                const startResponse = await fetch(`${API_URL}/missions/${data.mission_id}/start`, { method: 'POST' });
+                const startData = await startResponse.json();
+                alert('✓ Mission started!');
+                
+                document.getElementById('active-missions').textContent = '1';
+            } catch (error) {
+                alert('✗ Error: ' + error.message);
+            }
+        }
+
+        // Initialize charts
+        const batteryCtx = document.getElementById('batteryChart').getContext('2d');
+        new Chart(batteryCtx, {
+            type: 'line',
+            data: {
+                labels: ['0min', '5min', '10min', '15min', '20min'],
+                datasets: [{
+                    label: 'Battery %',
+                    data: [100, 95, 89, 82, 75],
+                    borderColor: '#00ff00',
+                    backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: '#fff' } }
+                },
+                scales: {
+                    y: { ticks: { color: '#fff' }, grid: { color: '#404040' } },
+                    x: { ticks: { color: '#fff' }, grid: { color: '#404040' } }
+                }
+            }
+        });
+
+        const altitudeCtx = document.getElementById('altitudeChart').getContext('2d');
+        new Chart(altitudeCtx, {
+            type: 'line',
+            data: {
+                labels: ['0min', '5min', '10min', '15min', '20min'],
+                datasets: [{
+                    label: 'Altitude (m)',
+                    data: [0, 25, 50, 50, 0],
+                    borderColor: '#0099ff',
+                    backgroundColor: 'rgba(0, 153, 255, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: '#fff' } }
+                },
+                scales: {
+                    y: { ticks: { color: '#fff' }, grid: { color: '#404040' } },
+                    x: { ticks: { color: '#fff' }, grid: { color: '#404040' } }
+                }
+            }
+        });
+
+        // Update status every 2 seconds
+        setInterval(updateStatus, 2000);
+        updateStatus();
+    </script>
+</body>
+</html>
